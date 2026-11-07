@@ -1,4 +1,4 @@
-import {days,slots,slotById} from './data.js?v=20261107-stella';
+import {days,slots,slotById} from './data.js?v=20261107-band-starts';
 import {element,fetchJson,timeLabel} from './live.js?v=20261107-letterspacing';
 import './footer.js';
 const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());

@@ -1,4 +1,4 @@
-import {bands,days} from './data.js?v=20261107-stella';
+import {bands,days} from './data.js?v=20261107-band-starts';
 import {element} from './live.js?v=20261107-letterspacing';
 import './footer.js';
 const appearances=band=>days.flatMap(day=>day.sections.flatMap(section=>section.slots.filter(slot=>slot.bandId===band.id).map(slot=>({day,section,slot}))));
