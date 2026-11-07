@@ -1,5 +1,5 @@
 import {days,slots,slotById} from './data.js';
-import {element,fetchJson,timeLabel} from './live.js';
+import {element,fetchJson,timeLabel} from './live.js?v=20261107-live';
 import './footer.js';
 const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());
 const requestedDay=new URLSearchParams(location.search).get('day');
