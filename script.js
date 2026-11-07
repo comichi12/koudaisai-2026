@@ -12,7 +12,9 @@ function renderSchedule(){
  const currentIndex=slots.findIndex(slot=>slot.id===current?.slotId);
  days.find(day=>day.date===selected).sections.forEach(section=>{
   const block=element('section','schedule-part'),heading=element('div','part-heading');
-  heading.append(element('h3','',section.title),element('span','part-time',`${section.start} 開始予定`));block.append(heading);
+  const start=element('span','part-time');
+  start.append(element('strong','part-clock',section.start),element('span','part-start-label','開始予定'));
+  heading.append(element('h3','',section.title),start);block.append(heading);
   section.slots.forEach(slot=>{
    const live=current?.slotId===slot.id,ended=currentIndex>=0&&slots.indexOf(slot)<currentIndex;
    const row=element('a',`schedule-row ${live?'is-live':ended?'is-ended':''}`);row.id=`slot-${slot.id}`;row.href=`band.html?id=${slot.bandId}`;

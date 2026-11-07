@@ -70,7 +70,11 @@
   .schedule-part { @apply mb-9; }
   .part-heading { @apply mb-1 flex items-center justify-between gap-3 border-b border-zinc-900 py-4; }
   .part-heading h3 { @apply m-0 text-sm; }
-  .part-time { @apply text-xs font-semibold tabular-nums text-zinc-500; }
+  .part-time { @apply inline-flex flex-wrap items-baseline justify-end gap-2 tabular-nums; color:#34765e; }
+  .part-clock { font-size:28px; font-weight:600; line-height:1.2; letter-spacing:.04em; }
+  .part-start-label { font-size:11px; font-weight:500; color:#71717a; }
+  .day-tab { letter-spacing:.08em; }
+  .slot-order,.live-date,.social-links a { letter-spacing:.04em; }
   .schedule-row { @apply relative flex items-center gap-4 border-b border-zinc-200 bg-white px-2 py-5 transition-colors hover:bg-zinc-50; scroll-margin-top:150px; }
   .slot-order { @apply min-w-6 self-start pt-1 text-xs font-medium tabular-nums text-zinc-400; }
   .slot-content { @apply min-w-0 flex-1; }
@@ -150,8 +154,10 @@
   .part-heading h3 { color:#34765e; }
   .schedule-part:nth-child(2) .part-heading { border-color:#e4b5c7; }
   .schedule-part:nth-child(2) .part-heading h3 { color:#954e68; }
+  .schedule-part:nth-child(2) .part-time { color:#954e68; }
   .schedule-part:nth-child(3) .part-heading { border-color:#ddc58a; }
   .schedule-part:nth-child(3) .part-heading h3 { color:#8a702c; }
+  .schedule-part:nth-child(3) .part-time { color:#8a702c; }
   .slot-order { display:grid; place-items:center; min-width:28px; height:28px; padding-top:0; border-radius:50%; background:#edf7f2; color:#4b806d; }
   .schedule-part:nth-child(2) .slot-order { background:#fcf0f5; color:#a1667c; }
   .schedule-part:nth-child(3) .slot-order { background:#faf5e9; color:#947b3e; }
@@ -179,6 +185,7 @@
   .hero h1 { @apply text-[18px]; }
   .hero-dates { gap:12px; }
   .hero-dates p { min-width:0; padding:12px 16px; }
+  .part-clock { font-size:26px; }
   .festival-hero::before { height:190px; }
   .schedule-row { @apply gap-3 px-1 py-4; }
   .slot-content h4 { @apply text-base; }
