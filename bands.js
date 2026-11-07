@@ -17,7 +17,7 @@ if(detail){
     appearances(band).forEach(({day,section,slot})=>{
       const date=new Intl.DateTimeFormat('ja-JP',{month:'numeric',day:'numeric',weekday:'short',timeZone:'Asia/Tokyo'}).format(new Date(`${day.date}T12:00:00+09:00`));
       const card=element('section','appearance');
-      card.append(element('p','eyebrow',date),element('h3','',`${section.title}・${slot.order}番目`),element('p','',slot.songs));
+      card.append(element('p','eyebrow',date),element('h3','',`${section.title}・${String(slot.order).padStart(2,'0')}`),element('p','',slot.songs));
       const link=element('a','text-link','タイムテーブルを見る ↗');
       link.href=`./?day=${day.date}#slot-${slot.id}`;
       card.append(link);detail.append(card);

@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
 @import 'tailwindcss' source(none);
 @source '../*.html';
 @source '../*.js';
 
 @theme {
-  --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+  --font-sans: 'Poppins', 'Zen Kaku Gothic New', sans-serif;
 }
 
 @layer base {
   html { scroll-behavior:smooth; scroll-padding-top:100px; }
   body { @apply m-0 min-h-svh bg-white font-sans text-zinc-900 antialiased; line-height:1.75; }
-  h1,h2,h3,h4 { @apply font-bold tracking-tight; line-height:1.45; overflow-wrap:anywhere; }
+  h1,h2,h3,h4 { @apply font-semibold tracking-tight; line-height:1.45; overflow-wrap:anywhere; }
   h1 { @apply text-3xl; }
   h2 { @apply text-2xl; }
   p { @apply mb-3; }
@@ -38,7 +38,7 @@
   .page { @apply mx-auto w-full max-w-[848px] px-6 pt-10 pb-20; }
   .festival-hero { @apply pt-6 pb-12; }
   .hero-brand { @apply my-5 block h-auto w-[180px] max-w-[70%]; }
-  .hero h1 { @apply mt-6 mb-4 text-[clamp(26px,5vw,40px)] font-bold tracking-tight; }
+  .hero h1 { @apply mt-6 mb-4 text-[clamp(26px,5vw,40px)] font-semibold tracking-tight; }
   .hero>p { @apply text-sm font-medium text-zinc-500; }
   .venue-chip { @apply relative mt-6 block w-fit border-l-2 border-zinc-900 py-1 pr-12 pl-4 text-xs text-zinc-500; }
   .venue-chip strong { @apply text-base font-semibold text-zinc-900; }
@@ -60,7 +60,7 @@
   .section-heading h2 { @apply mt-2 mb-0 text-xl; }
   .day-tabs { @apply sticky top-[72px] z-10 mt-6 mb-4 flex gap-6 border-b border-zinc-200 bg-white/95 backdrop-blur-md; }
   .day-tab { @apply flex-1 border-0 border-b-2 border-transparent bg-transparent px-2 py-4 text-sm font-semibold text-zinc-400 transition-colors; }
-  .day-tab[aria-selected=true] { @apply border-zinc-900 text-zinc-900; }
+  .day-tab[aria-selected=true] { @apply border-teal-700 text-teal-800; }
   .schedule-part { @apply mb-9; }
   .part-heading { @apply mb-1 flex items-center justify-between gap-3 border-b border-zinc-900 py-4; }
   .part-heading h3 { @apply m-0 text-sm; }
@@ -91,7 +91,7 @@
   .band-card { @apply border-b border-zinc-200 py-6 transition-colors hover:bg-zinc-50; }
   .band-card h2 { @apply mt-3 mb-2 text-base font-semibold; }
   .band-card p { @apply m-0 text-[11px]; }
-  .band-monogram { @apply grid size-9 place-items-center rounded-md bg-zinc-100 text-base font-semibold text-zinc-500; }
+  .band-monogram { @apply grid size-9 place-items-center rounded-md bg-teal-50 text-base font-semibold text-teal-800; }
   .band-title { @apply mt-4 mb-8 text-3xl; }
   .subheading { @apply mt-8 mb-4 text-sm; }
   .appearance { @apply mb-3 border-b border-zinc-200 py-4; }
@@ -113,6 +113,7 @@
   dialog h2 { @apply text-xl; }
   .dialog-actions { @apply mt-6 flex justify-end gap-3; }
 }
+
 
 @media(max-width:480px) {
   .page { @apply px-5 pt-6 pb-14; }
