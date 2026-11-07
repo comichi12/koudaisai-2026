@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss' source(none);
+@source '../*.html';
+@source '../*.js';
+
+@theme {
+  --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior:smooth; scroll-padding-top:100px; }
+  body { @apply m-0 min-h-svh bg-white font-sans text-zinc-900 antialiased; line-height:1.75; }
+  h1,h2,h3,h4 { @apply font-bold tracking-tight; line-height:1.45; overflow-wrap:anywhere; }
+  h1 { @apply text-3xl; }
+  h2 { @apply text-2xl; }
+  p { @apply mb-3; }
+  a { @apply no-underline; color:inherit; }
+  button,input,select { font:inherit; }
+  button,a { touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+  button { @apply cursor-pointer; }
+  button:disabled,fieldset:disabled button { @apply cursor-default opacity-40; }
+  :is(a,button,input,select):focus-visible { @apply outline-2 outline-offset-4 outline-teal-700; }
+  svg { @apply block size-5 shrink-0; }
+  input,select { @apply w-full min-w-0 rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900; }
+  fieldset { @apply m-0 border-0 p-0; }
+}
+
+@layer components {
+  .muted { @apply text-zinc-500; }
+  .small { @apply text-xs; }
+  .eyebrow { @apply text-[10px] font-semibold uppercase tracking-[.18em] text-zinc-500; }
+  .site-header { @apply sticky top-0 z-20 flex min-h-[72px] items-center gap-5 border-b border-zinc-200 bg-white/95 px-5 py-3 text-xs font-semibold backdrop-blur-md; padding-inline:max(20px,calc((100% - 960px)/2)); }
+  .site-header>a:last-child { @apply ml-auto; }
+  .wordmark { @apply inline-flex shrink-0 items-center; }
+  .wordmark img { @apply block h-8 w-[88px] max-w-[88px] object-contain; }
+  .header-caption { @apply text-[10px] text-zinc-500; }
+  .icon-link { @apply flex items-center gap-2; }
+  .page { @apply mx-auto w-full max-w-[848px] px-6 pt-10 pb-20; }
+  .festival-hero { @apply pt-6 pb-12; }
+  .hero-brand { @apply my-5 block h-auto w-[180px] max-w-[70%]; }
+  .hero h1 { @apply mt-6 mb-4 text-[clamp(26px,5vw,40px)] font-bold tracking-tight; }
+  .hero>p { @apply text-sm font-medium text-zinc-500; }
+  .venue-chip { @apply relative mt-6 block w-fit border-l-2 border-zinc-900 py-1 pr-12 pl-4 text-xs text-zinc-500; }
+  .venue-chip strong { @apply text-base font-semibold text-zinc-900; }
+  .venue-chip>span { @apply absolute top-3 right-3; }
+  .live-panel { @apply mb-12 border-y border-zinc-200 py-6; }
+  .live-top { @apply mb-5 flex items-center justify-between gap-3; }
+  .live-label { @apply inline-flex items-center gap-2 text-[10px] font-bold tracking-[.15em] text-teal-800; }
+  .live-label:before { content:''; @apply size-1.5 rounded-full bg-teal-600; }
+  .connection { @apply text-right text-[10px] text-zinc-500; }
+  .connection.offline { @apply text-amber-800; }
+  .live-panel h2 { @apply mb-3 text-[clamp(24px,5vw,34px)]; }
+  .live-panel h2 a:hover { @apply underline underline-offset-4; }
+  .live-panel p:last-child { @apply mb-0; }
+  .live-panel p { @apply text-sm text-zinc-500; }
+  .live-date { @apply text-xs font-semibold text-teal-800; }
+  .up-next { @apply text-xs text-zinc-500; }
+  .text-link { @apply inline-block border-0 bg-transparent py-2 text-xs font-semibold text-zinc-700 underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-900; }
+  .section-heading { @apply mb-3 flex items-center justify-between gap-4; }
+  .section-heading h2 { @apply mt-2 mb-0 text-xl; }
+  .day-tabs { @apply sticky top-[72px] z-10 mt-6 mb-4 flex gap-6 border-b border-zinc-200 bg-white/95 backdrop-blur-md; }
+  .day-tab { @apply flex-1 border-0 border-b-2 border-transparent bg-transparent px-2 py-4 text-sm font-semibold text-zinc-400 transition-colors; }
+  .day-tab[aria-selected=true] { @apply border-zinc-900 text-zinc-900; }
+  .schedule-part { @apply mb-9; }
+  .part-heading { @apply mb-1 flex items-center justify-between gap-3 border-b border-zinc-900 py-4; }
+  .part-heading h3 { @apply m-0 text-sm; }
+  .part-time { @apply text-xs font-semibold tabular-nums text-zinc-500; }
+  .schedule-row { @apply relative flex items-center gap-4 border-b border-zinc-200 bg-white px-2 py-5 transition-colors hover:bg-zinc-50; scroll-margin-top:150px; }
+  .slot-order { @apply min-w-6 self-start pt-1 text-xs font-medium tabular-nums text-zinc-400; }
+  .slot-content { @apply min-w-0 flex-1; }
+  .slot-content h4 { @apply m-0 mb-1 text-base font-semibold; }
+  .slot-songs { @apply m-0 text-xs text-zinc-500; overflow-wrap:anywhere; }
+  .slot-status { @apply shrink-0 text-[10px] text-zinc-400; }
+  .on-air { @apply inline-block rounded px-2 py-1 text-[10px] font-bold text-teal-800; background:#e7f5f0; }
+  .schedule-row.is-live { @apply border-l-2 border-l-teal-700 pl-4; background:#f4faf7; }
+  .schedule-row.is-ended .slot-content { @apply opacity-45; }
+  .venue-section { @apply mt-14 border-t border-zinc-200 pt-8; }
+  .venue-section h2 { @apply mt-2 mb-5 text-xl; }
+  .venue-name { @apply text-sm text-zinc-500; }
+  .venue-name strong { @apply text-lg font-semibold text-zinc-900; }
+  .social-section { @apply mt-12 border-t border-zinc-200 pt-8; }
+  .social-section h2 { @apply mb-4 text-base; }
+  .social-links { @apply flex flex-wrap gap-6; }
+  .social-links a { @apply flex min-h-11 items-center gap-2 text-xs font-medium hover:underline; }
+  .site-footer { @apply border-t border-zinc-200 bg-white px-5 py-10 text-center; padding-bottom:max(36px,env(safe-area-inset-bottom)); }
+  .footer-logo { @apply mb-4 inline-block; }
+  .footer-logo img { @apply h-12 w-32 object-contain opacity-60 hover:opacity-100; }
+  .site-footer p { @apply m-0 text-[10px] tracking-wide text-zinc-400; }
+  .search-label { @apply mt-7 mb-2 block text-xs font-semibold; }
+  .band-grid { @apply grid grid-cols-2 gap-x-6; }
+  .band-card { @apply border-b border-zinc-200 py-6 transition-colors hover:bg-zinc-50; }
+  .band-card h2 { @apply mt-3 mb-2 text-base font-semibold; }
+  .band-card p { @apply m-0 text-[11px]; }
+  .band-monogram { @apply grid size-9 place-items-center rounded-md bg-zinc-100 text-base font-semibold text-zinc-500; }
+  .band-title { @apply mt-4 mb-8 text-3xl; }
+  .subheading { @apply mt-8 mb-4 text-sm; }
+  .appearance { @apply mb-3 border-b border-zinc-200 py-4; }
+  .appearance h3 { @apply my-2 text-base; }
+  .appearance p { @apply text-xs; }
+  .admin-page h1 { @apply my-3; }
+  .admin-page .live-panel { @apply my-6; }
+  .notice { @apply rounded-md bg-zinc-100 px-4 py-3 text-xs; }
+  fieldset :is(.primary-button,.secondary-button) { @apply mt-4 w-full; }
+  .primary-button,.secondary-button { @apply min-h-12 rounded-lg border-0 px-5 py-3 text-sm font-semibold; }
+  .primary-button { @apply bg-zinc-900 text-white hover:bg-zinc-700; }
+  .secondary-button { @apply bg-zinc-100 text-zinc-900 hover:bg-zinc-200; }
+  .history-section { @apply mt-12; }
+  .history-section ol { @apply list-none p-0; }
+  .history-section li { @apply flex flex-col border-b border-zinc-200 py-4 text-sm; }
+  .history-section time { @apply text-[10px] tabular-nums text-zinc-500; }
+  dialog { @apply m-auto w-[min(92vw,440px)] rounded-xl border border-zinc-200 p-7 shadow-xl; }
+  dialog::backdrop { background:#18181b80; }
+  dialog h2 { @apply text-xl; }
+  .dialog-actions { @apply mt-6 flex justify-end gap-3; }
+}
+
+@media(max-width:480px) {
+  .page { @apply px-5 pt-6 pb-14; }
+  .site-header { @apply gap-3; }
+  .header-caption { @apply max-w-24 text-[9px]; }
+  .icon-link { @apply text-[11px]; }
+  .festival-hero { @apply pt-4 pb-9; }
+  .schedule-row { @apply gap-3 px-1 py-4; }
+  .slot-content h4 { @apply text-[15px]; }
+  .band-grid { @apply gap-x-4; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  * { transition:none!important; }
+}

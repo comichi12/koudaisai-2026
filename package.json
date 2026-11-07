@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:css": "tailwindcss -i ./styles/input.css -o ./style.css --minify",
     "test": "node --test tests/*.test.js",
     "dev": "wrangler dev",
     "preview": "node scripts/preview.js",
@@ -10,5 +11,9 @@
     "db:local": "wrangler d1 migrations apply koudaisai-live --local",
     "db:remote": "wrangler d1 migrations apply koudaisai-live --remote"
   },
-  "devDependencies": { "wrangler": "^4.0.0" }
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5",
+    "wrangler": "^4.0.0"
+  }
 }

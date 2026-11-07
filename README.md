@@ -85,6 +85,8 @@ Workerも同じdata.jsを使うため、タイテの変更時はWorkerの再デ�
 
 ## 公開前確認
 
+デザインはTailwind CSSで管理します。styles/input.cssを編集し、npm run build:cssでstyle.cssを生成して両方コミットしてください。GitHub Pagesでは生成済みCSSを配信するため、ブラウザーでTailwindの実行やCDN読込は不要です。
+
 - WorkerとD1の公開、API_BASE、PUBLIC_ORIGIN、OPERATOR_KEYS
 - 担当者用URLから操作し、別端末の公開ページへ反映されること
 - 本番でCSVを取得できること
