@@ -44,11 +44,11 @@
   .hero-dates { @apply mb-7 flex justify-center gap-10; }
   .hero-dates>a { @apply m-0 flex flex-col gap-1 text-sm; }
   .hero-dates strong { @apply font-bold; }
-  .hero-dates span { @apply text-xs tabular-nums text-zinc-500; }
+  .hero-dates>a>span { @apply text-xs tabular-nums; }
   .hero>p { @apply text-sm font-medium text-zinc-500; }
   .venue-chip { @apply relative mx-auto mt-6 block w-fit border-l-2 border-zinc-900 py-1 pr-12 pl-4 text-left text-xs text-zinc-500; }
   .venue-chip strong { @apply text-base font-semibold text-zinc-900; }
-  .venue-chip>span { @apply absolute top-3 right-3; }
+  .venue-chip>[aria-hidden="true"] { @apply absolute top-3 right-3; }
   .live-panel { @apply mb-12 border-y border-zinc-200 py-6; }
   .live-top { @apply mb-5 flex items-center justify-between gap-3; }
   .live-label { @apply inline-flex items-center gap-2 text-[10px] font-bold tracking-[.15em] text-teal-800; }
@@ -144,7 +144,7 @@
   .hero-dates { gap:16px; }
   .hero-dates>a { min-width:155px; padding:14px 24px; border:1px solid #cce6dc; border-radius:14px; background:#f0faf5; color:#286650; }
   .hero-dates>a:nth-child(2) { border-color:#f1d5df; background:#fff4f7; color:#954e68; }
-  .hero-dates span { color:inherit; opacity:.8; }
+  .hero-dates>a>span { color:inherit; opacity:.8; }
   .hero-dates>a { transition:box-shadow .15s,transform .15s; }
   .hero-dates>a:hover { box-shadow:0 4px 14px #34765e18; transform:translateY(-2px); }
   .venue-chip { border-left-color:#70ab97; }
