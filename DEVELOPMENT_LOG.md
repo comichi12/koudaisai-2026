@@ -14,3 +14,4 @@
 - ローカルで切替→公開反映→バンド詳細→CSVダウンロードをブラウザー確認。SQLiteを使うAPIテスト9件成功。本番CloudflareのDB・Secret・URL設定は別途必要。
 - Cloudflare CLIは未ログイン。dry-runではWorkerバンドル生成を確認したが終了コード1（ローカルCLI終了処理の問題を含む）。本番デプロイは未実施。公開用API_BASEも未設定であり、pushだけではリアルタイム連携は有効にならない。
 - ローカルコミット632d6a0を作成。originへのpushはGitHubから403（comichi12/koudaisai-2026に対するJam-TechLabの書込権限なし）で拒否された。公開サイトは未変更。共同編集権限の付与後にpushを再実行する。
+- 同日、ユーザーによる共同編集権限の追加後、40a2922までorigin/mainへのpush成功。GitHub Pagesの反映待ち。本番リアルタイム連携は引き続きCloudflareのDB・Secret・API_BASE設定が必要。
