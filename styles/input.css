@@ -98,8 +98,8 @@
   .site-footer p { @apply m-0 text-[10px] tracking-wide text-zinc-400; }
   .search-label { @apply mt-7 mb-2 block text-xs font-semibold; }
   .band-grid { @apply grid grid-cols-2 gap-x-6; }
-  .band-card { @apply border-b border-zinc-200 py-6 transition-colors hover:bg-zinc-50; }
-  .band-card h2 { @apply mt-3 mb-2 text-base font-semibold; }
+  .band-card { @apply border-b border-zinc-200 py-4 transition-colors hover:bg-zinc-50; }
+  .band-card h2 { @apply mt-0 mb-2 text-base font-semibold; }
   .band-card p { @apply m-0 text-[11px]; }
   .band-monogram { @apply grid size-9 place-items-center rounded-md bg-teal-50 text-base font-semibold text-teal-800; }
   .band-title { @apply mt-4 mb-8 text-3xl; }
