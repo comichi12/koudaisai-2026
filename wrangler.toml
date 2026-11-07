@@ -8,5 +8,5 @@ PUBLIC_ORIGIN = "https://comichi12.github.io"
 [[d1_databases]]
 binding = "DB"
 database_name = "koudaisai-live"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "d229f8c7-f566-4f2e-a68f-ee95beaa7c9c"
 migrations_dir = "migrations"

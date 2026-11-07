@@ -16,3 +16,5 @@
 - ローカルコミット632d6a0を作成。originへのpushはGitHubから403（comichi12/koudaisai-2026に対するJam-TechLabの書込権限なし）で拒否された。公開サイトは未変更。共同編集権限の付与後にpushを再実行する。
 - 同日、ユーザーによる共同編集権限の追加後、40a2922までorigin/mainへのpush成功。GitHub Pagesの反映待ち。本番リアルタイム連携は引き続きCloudflareのDB・Secret・API_BASE設定が必要。
 - ユーザー要望でトップとSNS欄のキャッチフレーズを撤去し、イベント名・公式SNSの直接的な見出しへ変更。Cloudflare認証はlocalhostコールバック待ちがタイムアウトしたため、デバイス認証へ切り替えて継続中。
+- デバイス認証が成功し、専用D1「koudaisai-live」を作成してmigration適用、Worker「grazie-koudaisai-live」を公開。操作キーはCloudflare Secretへ登録し、担当者用リンクをGit管理外の.local/admin-access.htmlに保存。秘密キーは会話・リポジトリへ載せない。
+- 公開API https://grazie-koudaisai-live.grazie-koudaisai-2026.workers.dev/api/state はブラウザーでversion=0 / slotId=nullの正常応答を確認。Node側の疎通はTLSエラーのためブラウザーで本番確認を継続。実データにテスト出演ログを作らない。

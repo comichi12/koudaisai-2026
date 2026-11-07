@@ -11,3 +11,4 @@ exclude:
   - README.md
   - DEVELOPMENT_LOG.md
   - scripts
+  - .local
