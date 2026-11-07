@@ -103,7 +103,9 @@
   .band-card p { @apply m-0 text-[11px]; }
   .band-monogram { @apply grid size-9 place-items-center rounded-md bg-teal-50 text-base font-semibold text-teal-800; }
   .band-title { @apply mt-4 mb-8 text-3xl; }
-  .poster-latin { letter-spacing:.04em; font-weight:600; font-size:1.1em; }
+  .poster-latin { letter-spacing:.08em; font-weight:600; font-size:1.1em; }
+  .latin-spacing { letter-spacing:.08em; }
+  .latin-spacing,.poster-latin { margin-inline:.04em; }
   .slot-content .poster-latin { font-size:1em; }
   :is(h1,h2,h3,h4,.band-name) { letter-spacing:0; font-weight:700; }
   .subheading { @apply mt-8 mb-4 text-sm; }
@@ -153,7 +155,7 @@
   .day-tab:nth-child(2)[aria-selected=true] { border-color:#e3b3c5; background:#fff1f5; color:#954e68; }
   .section-heading .eyebrow,.venue-section>.eyebrow { color:#40876e; }
   .part-heading { border-bottom:2px solid #96c7b4; padding-inline:8px; }
-  .part-heading h3 { color:#34765e; }
+  .part-heading h3 { color:#34765e; font-size:26px; letter-spacing:.12em; }
   .schedule-part:nth-child(2) .part-heading { border-color:#e4b5c7; }
   .schedule-part:nth-child(2) .part-heading h3 { color:#954e68; }
   .schedule-part:nth-child(2) .part-time { color:#954e68; }
@@ -188,6 +190,7 @@
   .hero-dates { gap:12px; }
   .hero-dates>a { min-width:0; padding:12px 16px; }
   .part-clock { font-size:26px; }
+  .part-heading h3 { font-size:23px; }
   .festival-hero::before { height:190px; }
   .schedule-row { @apply gap-3 px-1 py-4; }
   .slot-content h4 { @apply text-base; }
