@@ -36,11 +36,17 @@
   .header-caption { @apply text-[10px] text-zinc-500; }
   .icon-link { @apply flex items-center gap-2; }
   .page { @apply mx-auto w-full max-w-[848px] px-6 pt-10 pb-20; }
-  .festival-hero { @apply pt-6 pb-12; }
-  .hero-brand { @apply my-5 block h-auto w-[180px] max-w-[70%]; }
-  .hero h1 { @apply mt-6 mb-4 text-[clamp(26px,5vw,40px)] font-semibold tracking-tight; }
+  .festival-hero { @apply pt-6 pb-12 text-center; }
+  .hero-heading { @apply mt-7 mb-6 flex items-center justify-center gap-5; }
+  .hero-heading>a { @apply shrink-0; }
+  .hero-brand { @apply block h-auto w-[140px] max-w-full; }
+  .hero h1 { @apply m-0 text-[clamp(18px,3.4vw,30px)] font-bold; letter-spacing:.08em; }
+  .hero-dates { @apply mb-7 flex justify-center gap-10; }
+  .hero-dates p { @apply m-0 flex flex-col gap-1 text-sm; }
+  .hero-dates strong { @apply font-bold; }
+  .hero-dates span { @apply text-xs tabular-nums text-zinc-500; }
   .hero>p { @apply text-sm font-medium text-zinc-500; }
-  .venue-chip { @apply relative mt-6 block w-fit border-l-2 border-zinc-900 py-1 pr-12 pl-4 text-xs text-zinc-500; }
+  .venue-chip { @apply relative mx-auto mt-6 block w-fit border-l-2 border-zinc-900 py-1 pr-12 pl-4 text-left text-xs text-zinc-500; }
   .venue-chip strong { @apply text-base font-semibold text-zinc-900; }
   .venue-chip>span { @apply absolute top-3 right-3; }
   .live-panel { @apply mb-12 border-y border-zinc-200 py-6; }
@@ -123,6 +129,10 @@
   .header-caption { @apply max-w-24 text-[9px]; }
   .icon-link { @apply text-[11px]; }
   .festival-hero { @apply pt-4 pb-9; }
+  .hero-heading { @apply gap-3; }
+  .hero-brand { @apply w-20; }
+  .hero h1 { @apply text-[18px]; }
+  .hero-dates { @apply gap-6; }
   .schedule-row { @apply gap-3 px-1 py-4; }
   .slot-content h4 { @apply text-[15px]; }
   .band-grid { @apply gap-x-4; }
