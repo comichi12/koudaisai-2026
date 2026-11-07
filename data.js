@@ -1,5 +1,6 @@
 // C/Grazie!!運営/工大祭/タイテ確定版.pdfを基準に、公開可能な出演順と曲目のみ。
 // 各バンドの予定時刻・演奏時間・内部担当者情報は含めない。
+import {bandPosters} from './band-posters.js';
 const definitions = [
   ['2026-11-14','11.14 SAT','1日目',[
     ['第1部','12:00',[
@@ -17,7 +18,7 @@ const definitions = [
       ['そらいろ♪','群青讃歌 / 仮死化'],['8ワレ','夜空ノムコウ'],['電話','SHAKE'],['Stella★','星のかけらを探しに行こう / 星座になれたら'],['コエシカ','忘れてください / ブレーメン'],['追憶の響','美しい鰭 / 星のかがやきよ'],['燈幻響','115万キロのフィルム'],['なつめろん','東京ブギウギ / 赤いスイートピー'],['青りんごの森','コロンブス / 嘘じゃないよ']]]]]
 ];
 const names=[...new Set(definitions.flatMap(day=>day[3].flatMap(section=>section[2].map(row=>row[0]))))];
-export const bands=names.map((name,index)=>({id:`band-${String(index+1).padStart(2,'0')}`,name,description:'',members:[],photo:''}));
+export const bands=names.map((name,index)=>({id:`band-${String(index+1).padStart(2,'0')}`,name,description:'',members:[],photo:'',poster:bandPosters[name]?`assets/bands/${bandPosters[name]}`:''}));
 export const days=definitions.map(([date,label,name,sections])=>({date,label,name,sections:sections.map(([title,start,rows],i)=>({id:`${date}-part-${i+1}`,title,start,slots:rows.map(([bandName,songs],j)=>({id:`${date}-part-${i+1}-${j+1}`,date,part:i+1,order:j+1,bandId:bands.find(b=>b.name===bandName).id,title:bandName,songs,type:'band'}))}))}));
 export const slots=days.flatMap(day=>[
   {id:`${day.date}-waiting`,date:day.date,title:'開演前',type:'waiting'},

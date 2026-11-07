@@ -89,6 +89,6 @@ Workerも同じdata.jsを使うため、タイテの変更時はWorkerの再デ�
 - 担当者用URLから操作し、別端末の公開ページへ反映されること
 - 本番でCSVを取得できること
 - 公開先の `/pdf/timetable.pdf` が非公開になっていること
-- 紹介文・写真など、未提供の公開素材の追加
+- バンド紹介は提供済みの31枚のPNGをそのまま掲載。対応はband-posters.jsで管理し、出演番号は部ごとに数える。
 
 技術仕様: [Cloudflare D1 API](https://developers.cloudflare.com/d1/worker-api/d1-database/)
