@@ -1,0 +1,13 @@
+# GitHub Pagesの公開成果物へ、内部PDF・API実装・運用資料を含めない。
+exclude:
+  - pdf
+  - worker.js
+  - migrations
+  - tests
+  - node_modules
+  - wrangler.toml
+  - package.json
+  - package-lock.json
+  - README.md
+  - DEVELOPMENT_LOG.md
+  - scripts

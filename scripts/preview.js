@@ -1,0 +1,12 @@
+// ローカル確認専用。127.0.0.1以外には公開しない。終了すると進行ログは消える。
+import {createServer} from 'node:http';
+import {DatabaseSync} from 'node:sqlite';
+import {readFile} from 'node:fs/promises';
+import {readFileSync} from 'node:fs';
+import worker from '../worker.js';
+const db=new DatabaseSync(':memory:');db.exec(readFileSync(new URL('../migrations/0001_live.sql',import.meta.url),'utf8'));
+const DB={prepare(sql){let args=[];return{bind(...values){args=values;return this;},async first(){return db.prepare(sql).get(...args)||null;},async all(){return{results:db.prepare(sql).all(...args)};},run(){return{meta:{changes:Number(db.prepare(sql).run(...args).changes)}};}};},async batch(statements){db.exec('BEGIN');try{const result=statements.map(stmt=>stmt.run());db.exec('COMMIT');return result;}catch(error){db.exec('ROLLBACK');throw error;}}};
+const key='local-preview-only-12345678901234567890';
+const env={DB,OPERATOR_KEYS:JSON.stringify({'プレビュー':key}),PUBLIC_ORIGIN:'http://127.0.0.1:8788'};
+const files=new Set(['index.html','bands.html','band.html','admin.html','style.css','script.js','data.js','bands.js','admin.js','live.js','footer.js','config.js','assets/grazie-logo.png']);
+createServer(async(req,res)=>{try{const url=new URL(req.url,'http://127.0.0.1:8788');if(url.pathname.startsWith('/api/')){const chunks=[];for await(const chunk of req)chunks.push(chunk);const body=Buffer.concat(chunks);const request=new Request(url,{method:req.method,headers:req.headers,...(body.length?{body,duplex:'half'}:{})});const response=await worker.fetch(request,env);res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()));return;}const name=url.pathname==='/'?'index.html':decodeURIComponent(url.pathname.slice(1));if(!files.has(name)){res.writeHead(404);res.end('Not found');return;}const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8',png:'image/png'};res.writeHead(200,{'Content-Type':types[name.split('.').pop()]||'application/octet-stream','Cache-Control':'no-store'});res.end(await readFile(new URL(`../${name}`,import.meta.url)));}catch{res.writeHead(500);res.end('Preview error');}}).listen(8788,'127.0.0.1',()=>console.log(`Preview http://127.0.0.1:8788/\nLocal controls http://127.0.0.1:8788/admin.html#key=${key}`));

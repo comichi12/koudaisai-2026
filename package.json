@@ -1,0 +1,14 @@
+{
+  "name": "grazie-koudaisai-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "dev": "wrangler dev",
+    "preview": "node scripts/preview.js",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 migrations apply koudaisai-live --local",
+    "db:remote": "wrangler d1 migrations apply koudaisai-live --remote"
+  },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}
