@@ -18,3 +18,5 @@
 - ユーザー要望でトップとSNS欄のキャッチフレーズを撤去し、イベント名・公式SNSの直接的な見出しへ変更。Cloudflare認証はlocalhostコールバック待ちがタイムアウトしたため、デバイス認証へ切り替えて継続中。
 - デバイス認証が成功し、専用D1「koudaisai-live」を作成してmigration適用、Worker「grazie-koudaisai-live」を公開。操作キーはCloudflare Secretへ登録し、担当者用リンクをGit管理外の.local/admin-access.htmlに保存。秘密キーは会話・リポジトリへ載せない。
 - 公開API https://grazie-koudaisai-live.grazie-koudaisai-2026.workers.dev/api/state はブラウザーでversion=0 / slotId=nullの正常応答を確認。Node側の疎通はTLSエラーのためブラウザーで本番確認を継続。実データにテスト出演ログを作らない。
+- 本番APIで公開200、CORS許可、担当者API200、CSV200、匿名履歴401、不正枠POST400を確認。履歴0件、未開始のまま。本番公開ページで進行の更新確認、本番管理ページで「接続済み」と操作可能状態も確認できた。
+- ユーザー要望でGrazie!!の文字によるロゴ再現・!!だけの色変更を撤去し、全ページヘッダーとトップに公式ロゴ画像を使用。会場案内の冗長な誘導文を削除し、リンク先を大学トップから確認済みの工大祭公式 https://www.koudaisai.com/ へ変更。
