@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" fill="none">
+  <g stroke="#75b6a4" stroke-width="1.3" opacity=".28">
+    <path d="M-40 85 Q180 170 420 94 T940 85"/><path d="M-40 97 Q180 182 420 106 T940 97"/><path d="M-40 109 Q180 194 420 118 T940 109"/><path d="M-40 121 Q180 206 420 130 T940 121"/><path d="M-40 133 Q180 218 420 142 T940 133"/>
+  </g>
+  <g fill="#438b79" opacity=".42"><ellipse cx="90" cy="144" rx="9" ry="6" transform="rotate(-20 90 144)"/><path d="M97 142v-43h3v43z"/><ellipse cx="724" cy="72" rx="9" ry="6" transform="rotate(-20 724 72)"/><path d="M731 70V28h3v42zM732 28q23 5 16 25q-1-13-16-16z"/><ellipse cx="811" cy="94" rx="9" ry="6" transform="rotate(-20 811 94)"/><ellipse cx="844" cy="82" rx="9" ry="6" transform="rotate(-20 844 82)"/><path d="M818 92V48l33-12v44h-3V46l-27 10v36z"/></g>
+  <g fill="#e9a4b8" opacity=".4"><circle cx="38" cy="45" r="5"/><circle cx="860" cy="173" r="7"/><circle cx="778" cy="197" r="3"/><circle cx="146" cy="51" r="3"/></g>
+  <g stroke="#d9b25d" stroke-width="2" opacity=".45"><path d="M188 183v12m-6-6h12M667 185v12m-6-6h12M816 15v10m-5-5h10"/></g>
+</svg>
