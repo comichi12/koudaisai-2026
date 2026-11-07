@@ -42,7 +42,7 @@
   .hero-brand { @apply block h-auto w-[140px] max-w-full; }
   .hero h1 { @apply m-0 text-[clamp(18px,3.4vw,30px)] font-bold; letter-spacing:.08em; }
   .hero-dates { @apply mb-7 flex justify-center gap-10; }
-  .hero-dates p { @apply m-0 flex flex-col gap-1 text-sm; }
+  .hero-dates>a { @apply m-0 flex flex-col gap-1 text-sm; }
   .hero-dates strong { @apply font-bold; }
   .hero-dates span { @apply text-xs tabular-nums text-zinc-500; }
   .hero>p { @apply text-sm font-medium text-zinc-500; }
@@ -140,9 +140,11 @@
   #band-detail>.subheading::after { content:''; height:2px; flex:1; background:linear-gradient(90deg,#b0d8c7,#edc5d4); }
   .hero-heading { margin-top:2rem; margin-bottom:2rem; }
   .hero-dates { gap:16px; }
-  .hero-dates p { min-width:155px; padding:14px 24px; border:1px solid #cce6dc; border-radius:14px; background:#f0faf5; color:#286650; }
-  .hero-dates p:nth-child(2) { border-color:#f1d5df; background:#fff4f7; color:#954e68; }
+  .hero-dates>a { min-width:155px; padding:14px 24px; border:1px solid #cce6dc; border-radius:14px; background:#f0faf5; color:#286650; }
+  .hero-dates>a:nth-child(2) { border-color:#f1d5df; background:#fff4f7; color:#954e68; }
   .hero-dates span { color:inherit; opacity:.8; }
+  .hero-dates>a { transition:box-shadow .15s,transform .15s; }
+  .hero-dates>a:hover { box-shadow:0 4px 14px #34765e18; transform:translateY(-2px); }
   .venue-chip { border-left-color:#70ab97; }
   .live-panel { border:1px solid #cce6dc; border-top:3px solid #72b69e; border-radius:16px; padding:24px; background:#fbfefc; }
   .day-tabs { gap:12px; border-bottom:0; padding-bottom:8px; }
@@ -184,7 +186,7 @@
   .hero-brand { @apply w-20; }
   .hero h1 { @apply text-[18px]; }
   .hero-dates { gap:12px; }
-  .hero-dates p { min-width:0; padding:12px 16px; }
+  .hero-dates>a { min-width:0; padding:12px 16px; }
   .part-clock { font-size:26px; }
   .festival-hero::before { height:190px; }
   .schedule-row { @apply gap-3 px-1 py-4; }

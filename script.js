@@ -5,6 +5,13 @@ const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new 
 const requestedDay=new URLSearchParams(location.search).get('day');
 let selected=days.find(day=>day.date===requestedDay)?.date||days.find(day=>day.date===today)?.date||days[0].date,current=null,received=false,timer;
 const tabs=document.querySelector('.day-tabs'),schedule=document.getElementById('schedule');
+document.querySelectorAll('[data-schedule-day]').forEach(link=>link.addEventListener('click',event=>{
+ if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ event.preventDefault();selected=link.dataset.scheduleDay;renderSchedule();
+ history.replaceState(null,'',link.href);
+ document.getElementById(`tab-${selected}`).focus({preventScroll:true});
+ document.getElementById('timetable').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+}));
 days.forEach(day=>{const button=element('button','day-tab',day.label);button.type='button';button.role='tab';button.id=`tab-${day.date}`;button.setAttribute('aria-controls','schedule');button.addEventListener('click',()=>{selected=day.date;renderSchedule();});tabs.append(button);});
 function renderSchedule(){
  tabs.querySelectorAll('button').forEach((button,i)=>button.setAttribute('aria-selected',String(days[i].date===selected)));
