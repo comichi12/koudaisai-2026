@@ -1,5 +1,5 @@
 import {days,slots,slotById} from './data.js?v=20261107-stella';
-import {element,fetchJson,apiUrl,timeLabel} from './live.js?v=20261107-live';
+import {element,fetchJson,apiUrl,timeLabel} from './live.js?v=20261107-letterspacing';
 import './footer.js';
 // フラグメントはサーバーへ送信されない。キーをURL欄から除去し、タブのメモリのみで保持。
 const key=new URLSearchParams(location.hash.slice(1)).get('key')||'';

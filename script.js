@@ -1,5 +1,5 @@
 import {days,slots,slotById} from './data.js?v=20261107-stella';
-import {element,fetchJson,timeLabel} from './live.js?v=20261107-live';
+import {element,fetchJson,timeLabel} from './live.js?v=20261107-letterspacing';
 import './footer.js';
 const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo'}).format(new Date());
 const requestedDay=new URLSearchParams(location.search).get('day');
@@ -27,7 +27,7 @@ function renderLive(){
  const box=document.getElementById('now-playing'),slot=slotById(current?.slotId);box.replaceChildren();
  if(!slot){box.append(element('h2','','開演をお楽しみに'),element('p','','当日の進行はこちらでご案内します。'));return;}
  box.append(element('p','live-date',`${slot.date.slice(5).replace('-','/')} · ${slot.type==='band'?'NOW ON STAGE':slot.type==='break'?'INTERMISSION':slot.type==='waiting'?'OPENING SOON':'THANK YOU'}`));
- const heading=element('h2','',slot.title);if(slot.bandId){const link=element('a','',slot.title);link.href=`band.html?id=${slot.bandId}`;heading.replaceChildren(link);}box.append(heading);
+ const heading=element('h2','',slot.title);if(slot.bandId){const link=element('a','band-name',slot.title);link.href=`band.html?id=${slot.bandId}`;heading.replaceChildren(link);}box.append(heading);
  const next=slots.slice(slots.indexOf(slot)+1).find(item=>item.date===slot.date&&item.type==='band');
  if(next)box.append(element('p','up-next',`UP NEXT  ${next.title}`));
  if(slot.type==='band'){const jump=element('button','text-link','出演中の枠を見る ↓');jump.type='button';jump.addEventListener('click',()=>{selected=slot.date;renderSchedule();document.getElementById(`slot-${slot.id}`)?.scrollIntoView({behavior:'smooth',block:'center'});});box.append(jump);}
