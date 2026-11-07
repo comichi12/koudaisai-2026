@@ -135,8 +135,8 @@
   .festival-hero { position:relative; isolation:isolate; padding-top:3rem; }
   .festival-hero::before { content:''; position:absolute; z-index:-1; pointer-events:none; inset:0 -16px auto; height:230px; background:url('./assets/festival-score.svg?v=notes') center top/cover no-repeat; }
   #band-detail { position:relative; isolation:isolate; }
-  #band-detail .band-title { padding-block:0; }
-  #band-detail .band-title::after { content:''; display:block; pointer-events:none; height:48px; margin-top:16px; opacity:.55; background:url('./assets/festival-score.svg?v=notes') center/cover no-repeat; }
+  #band-detail .band-title { position:relative; isolation:isolate; padding-block:0; }
+  #band-detail .band-title::after { content:''; position:absolute; z-index:-1; pointer-events:none; top:-12px; bottom:-12px; right:0; width:50%; opacity:.55; background:url('./assets/festival-score.svg?v=notes') right center/cover no-repeat; }
   #band-detail>.eyebrow { color:#40876e; }
   #band-detail>.subheading { display:flex; align-items:center; gap:12px; color:#34765e; }
   #band-detail>.subheading::after { content:''; height:2px; flex:1; background:linear-gradient(90deg,#b0d8c7,#edc5d4); }
