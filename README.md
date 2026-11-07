@@ -85,6 +85,8 @@ Workerも同じdata.jsを使うため、タイテの変更時はWorkerの再デ�
 
 ## 公開前確認
 
+紹介PNGを更新した場合はnode scripts/optimize-posters.jsで表示用WebP(540/1080px)を再生成してください。原本のPNGは保管し、ページではWebPを読み込みます。
+
 デザインはTailwind CSSで管理します。styles/input.cssを編集し、npm run build:cssでstyle.cssを生成して両方コミットしてください。GitHub Pagesでは生成済みCSSを配信するため、ブラウザーでTailwindの実行やCDN読込は不要です。
 
 - WorkerとD1の公開、API_BASE、PUBLIC_ORIGIN、OPERATOR_KEYS

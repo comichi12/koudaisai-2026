@@ -15,7 +15,11 @@ if(detail){
     detail.append(element('div','eyebrow','BAND PROFILE'),element('h1','band-title',band.name));
     if(band.poster){
       const image=element('img','band-poster');
-      image.src=band.poster;image.alt=`${band.name}のバンド紹介`;
+      const stem=band.poster.replace(/\.png$/,'');
+      image.src=`${stem}-1080.webp`;
+      image.srcset=`${stem}-540.webp 540w, ${stem}-1080.webp 1080w`;
+      image.sizes='(max-width: 480px) calc(100vw - 40px), (max-width: 848px) calc(100vw - 48px), 800px';
+      image.fetchPriority='high';image.alt=`${band.name}のバンド紹介`;
       image.width=1080;image.height=1350;image.decoding='async';
       image.style.cssText='display:block;width:100%;max-width:100%;height:auto;margin-top:24px;border-radius:16px';
       detail.append(image);

@@ -100,6 +100,7 @@
   .band-monogram { @apply grid size-9 place-items-center rounded-md bg-teal-50 text-base font-semibold text-teal-800; }
   .band-title { @apply mt-4 mb-8 text-3xl; }
   .poster-latin { letter-spacing:.04em; font-weight:600; font-size:1.1em; }
+  .slot-content .poster-latin { font-size:1em; }
   :is(h1,h2,h3,h4,.band-name) { letter-spacing:0; font-weight:700; }
   .subheading { @apply mt-8 mb-4 text-sm; }
   .appearance { @apply mb-3 border-b border-zinc-200 py-4; }
@@ -174,7 +175,7 @@
   .hero-dates p { min-width:0; padding:12px 16px; }
   .festival-hero::before { height:190px; }
   .schedule-row { @apply gap-3 px-1 py-4; }
-  .slot-content h4 { @apply text-[15px]; }
+  .slot-content h4 { @apply text-base; }
   .band-grid { @apply gap-x-4; }
 }
 @media(prefers-reduced-motion:reduce) {
