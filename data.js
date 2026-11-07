@@ -1,6 +1,6 @@
 // C/Grazie!!運営/工大祭/タイテ確定版.pdfを基準に、公開可能な出演順と曲目のみ。
 // 各バンドの予定時刻・演奏時間・内部担当者情報は含めない。
-import {bandPosters} from './band-posters.js';
+import {bandPosters} from './band-posters.js?v=20261107-stella';
 const definitions = [
   ['2026-11-14','11.14 SAT','1日目',[
     ['第1部','12:00',[
