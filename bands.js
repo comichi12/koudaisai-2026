@@ -13,6 +13,13 @@ if(detail){
   }else{
     document.title=`${band.name} | Grazie!! 工大祭2026`;
     detail.append(element('div','eyebrow','BAND PROFILE'),element('h1','band-title',band.name));
+    if(band.poster){
+      const image=element('img','band-poster');
+      image.src=band.poster;image.alt=`${band.name}のバンド紹介`;
+      image.width=1080;image.height=1350;image.decoding='async';
+      image.style.cssText='display:block;width:100%;max-width:100%;height:auto;margin-top:24px;border-radius:16px';
+      detail.append(image);
+    }
     detail.append(element('h2','subheading','出演・演奏曲'));
     appearances(band).forEach(({day,section,slot})=>{
       const date=new Intl.DateTimeFormat('ja-JP',{month:'numeric',day:'numeric',weekday:'short',timeZone:'Asia/Tokyo'}).format(new Date(`${day.date}T12:00:00+09:00`));
@@ -22,12 +29,5 @@ if(detail){
       link.href=`./?day=${day.date}#slot-${slot.id}`;
       card.append(link);detail.append(card);
     });
-    if(band.poster){
-      const image=element('img','band-poster');
-      image.src=band.poster;image.alt=`${band.name}のバンド紹介`;
-      image.width=1080;image.height=1350;image.decoding='async';
-      image.style.cssText='display:block;width:100%;max-width:100%;height:auto;margin-top:24px;border-radius:16px';
-      detail.append(image);
-    }
   }
 }
