@@ -97,6 +97,8 @@
   .footer-logo img { @apply h-12 w-32 object-contain opacity-60 hover:opacity-100; }
   .site-footer p { @apply m-0 text-[10px] tracking-wide text-zinc-400; }
   .search-label { @apply mt-7 mb-2 block text-xs font-semibold; }
+  .search-input { display:block; }
+  #search-count { margin-top:14px; margin-bottom:8px; }
   .band-grid { @apply grid grid-cols-2 gap-x-6; }
   .band-card { @apply border-b border-zinc-200 py-4 transition-colors hover:bg-zinc-50; }
   .band-card h2 { @apply mt-0 mb-2 text-base font-semibold; }
