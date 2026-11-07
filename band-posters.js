@@ -19,7 +19,7 @@ export const bandPosters = {
   '追憶の響': '17.png',
   '燈幻響': '18.png',
   'オムライス': '19.png',
-  'Stella★': '20.png',
+  'Stella⭐️': '20.png',
   'libertá': '21.png',
   'クローネ': '22.png',
   '雫音': '23.png',
