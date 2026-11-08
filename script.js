@@ -28,7 +28,10 @@ function renderSchedule(){
    row.append(element('span','slot-order',String(slot.order).padStart(2,'0')));
    const content=element('div','slot-content');content.append(element('h4','',slot.title));
    if(slot.songs)content.append(element('p','slot-songs',slot.songs));row.append(content);
-   row.append(element('span',`slot-status ${live?'on-air':''}`,live?'出演中':ended?'終了':'↗'));block.append(row);
+   const action=element('span','slot-action');
+   if(live||ended)action.append(element('span',`slot-status ${live?'on-air':''}`,live?'出演中':'終了'));
+   const arrow=element('span','slot-chevron','›');arrow.setAttribute('aria-hidden','true');action.append(arrow);
+   row.append(action);block.append(row);
   });schedule.append(block);
  });
 }

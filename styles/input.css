@@ -75,7 +75,10 @@
   .part-start-label { font-size:11px; font-weight:500; color:#71717a; }
   .day-tab { letter-spacing:.08em; }
   .slot-order,.live-date,.social-links a { letter-spacing:.04em; }
-  .schedule-row { @apply relative flex items-center gap-4 border-b border-zinc-200 bg-white px-2 py-5 transition-colors hover:bg-zinc-50; scroll-margin-top:150px; }
+  .schedule-row { @apply relative flex items-center gap-4 border border-zinc-200 bg-white px-4 py-4 transition-colors hover:bg-zinc-50; border-radius:12px; margin-top:10px; box-shadow:0 2px 5px #183f2d05; scroll-margin-top:150px; }
+  .slot-action { display:flex; flex-shrink:0; align-items:center; gap:8px; }
+  .slot-chevron { display:grid; place-items:center; width:28px; height:28px; border:1px solid #d7e9df; border-radius:50%; background:#f1f8f4; color:#40876e; font-size:22px; line-height:1; }
+  .schedule-row:active { background:#eaf5ef; border-color:#92c5b2; }
   .slot-order { @apply min-w-6 self-start pt-1 text-xs font-medium tabular-nums text-zinc-400; }
   .slot-content { @apply min-w-0 flex-1; }
   .slot-content h4 { @apply m-0 mb-1 text-base font-semibold; }
@@ -200,7 +203,8 @@
   .part-clock { font-size:26px; }
   .part-heading h3 { font-size:23px; }
   .festival-hero::before { height:190px; }
-  .schedule-row { @apply gap-3 px-1 py-4; }
+  .schedule-row { @apply gap-3 px-3 py-4; }
+  .slot-action { flex-direction:column; gap:5px; }
   .slot-content h4 { @apply text-base; }
   .band-grid { @apply gap-x-4; }
 }
