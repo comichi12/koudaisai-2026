@@ -19,6 +19,7 @@ function renderSchedule(){
  const currentIndex=slots.findIndex(slot=>slot.id===current?.slotId);
  days.find(day=>day.date===selected).sections.forEach(section=>{
   const block=element('section','schedule-part'),heading=element('div','part-heading');
+  block.dataset.part=section.slots[0].part;
   const start=element('span','part-time');
   start.append(element('strong','part-clock',section.start),element('span','part-start-label','開始予定'));
   heading.append(element('h3','',section.title),start);block.append(heading);
@@ -37,11 +38,12 @@ function renderSchedule(){
 }
 function renderLive(){
  const box=document.getElementById('now-playing'),slot=slotById(current?.slotId);box.replaceChildren();
+ box.closest('.live-panel').dataset.part=slot?.part||1;
  if(!slot){box.append(element('h2','','開演をお楽しみに'),element('p','','当日の進行はこちらでご案内します。'));return;}
  box.append(element('p','live-date',`${slot.date.slice(5).replace('-','/')} · ${slot.type==='band'?'NOW ON STAGE':slot.type==='break'?'INTERMISSION':slot.type==='waiting'?'OPENING SOON':'THANK YOU'}`));
  const heading=element('h2','',slot.title);if(slot.bandId){const link=element('a','band-name',slot.title);link.href=`band.html?id=${slot.bandId}`;heading.replaceChildren(link);}box.append(heading);
  const next=slots.slice(slots.indexOf(slot)+1).find(item=>item.date===slot.date&&item.type==='band');
- if(next)box.append(element('p','up-next',`UP NEXT  ${next.title}`));
+ if(next){const upcoming=element('p','up-next');upcoming.append(element('span','up-next-label','UP NEXT'),element('strong','up-next-name',next.title));box.append(upcoming);}
  if(slot.type==='band'){const jump=element('button','text-link','出演中の枠を見る ↓');jump.type='button';jump.addEventListener('click',()=>{selected=slot.date;renderSchedule();document.getElementById(`slot-${slot.id}`)?.scrollIntoView({behavior:'smooth',block:'center'});});box.append(jump);}
 }
 async function refresh(){clearTimeout(timer);if(document.hidden)return;const connection=document.getElementById('connection');try{const next=await fetchJson('/api/state');if(!received||next.version!==current?.version){current=next;renderLive();renderSchedule();}received=true;connection.textContent=`更新確認 ${timeLabel(new Date().toISOString())}`;connection.classList.remove('offline');}catch{connection.textContent=received?'接続待ち · 最後の進行を表示中':'進行情報に接続できません';connection.classList.add('offline');}finally{timer=setTimeout(refresh,5000);}}
