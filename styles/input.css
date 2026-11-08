@@ -116,6 +116,11 @@
   .appearance h3 { @apply my-2 text-base; }
   .appearance p { @apply text-xs; }
   .admin-page h1 { @apply my-3; }
+  .advance-section h2 { font-size:18px; margin-bottom:8px; }
+  .advance-section #admin-next { font-size:14px; margin-bottom:0; }
+  .jump-section { margin-top:28px; border:1px solid #d7e9df; border-radius:12px; padding:18px; }
+  .jump-section summary { cursor:pointer; font-size:14px; font-weight:700; }
+  .jump-section[open] summary { margin-bottom:16px; }
   .admin-page .live-panel { @apply my-6; }
   .notice { @apply rounded-md bg-zinc-100 px-4 py-3 text-xs; }
   fieldset :is(.primary-button,.secondary-button) { @apply mt-4 w-full; }
