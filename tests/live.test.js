@@ -4,6 +4,13 @@ import {DatabaseSync} from 'node:sqlite';
 import {readFileSync} from 'node:fs';
 import worker,{handleRequest,historyCsv,csvCell} from '../worker.js';
 import {days,slots,bands} from '../data.js';
+test('Saturday closing advances to Sunday opening, and Sunday closing is final',()=>{
+ const saturdayEnd=slots.findIndex(slot=>slot.id==='2026-11-14-finished');
+ assert(saturdayEnd>=0);
+ assert.equal(slots[saturdayEnd+1].id,'2026-11-15-waiting');
+ assert.equal(slots[saturdayEnd+1].title,'開演前');
+ assert.equal(slots.at(-1).id,'2026-11-15-finished');
+});
 const key='test-only-key-123456789012345678901234567890';
 function setup(){const sqlite=new DatabaseSync(':memory:');sqlite.exec(readFileSync(new URL('../migrations/0001_live.sql',import.meta.url),'utf8'));const DB={prepare(sql){let args=[];return{bind(...values){args=values;return this;},async first(){return sqlite.prepare(sql).get(...args)||null;},async all(){return{results:sqlite.prepare(sql).all(...args)};},run(){const result=sqlite.prepare(sql).run(...args);return{meta:{changes:Number(result.changes)}};}};},async batch(statements){sqlite.exec('BEGIN');try{const results=statements.map(stmt=>stmt.run());sqlite.exec('COMMIT');return results;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};return{DB,OPERATOR_KEYS:JSON.stringify({'担当A':key}),PUBLIC_ORIGIN:'https://comichi12.github.io'};}
 const request=(path,body,token=key)=>new Request(`https://api.test${path}`,{method:body?'POST':'GET',headers:{Authorization:`Bearer ${token}`,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});
