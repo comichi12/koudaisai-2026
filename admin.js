@@ -1,9 +1,12 @@
 import {days,slots,slotById} from './data.js?v=20261107-band-starts';
 import {element,fetchJson,apiUrl,timeLabel} from './live.js?v=20261107-letterspacing';
 import './footer.js';
-// フラグメントはサーバーへ送信されない。キーをURL欄から除去し、タブのメモリのみで保持。
-const key=new URLSearchParams(location.hash.slice(1)).get('key')||'';
-history.replaceState(null,'',location.pathname+location.search);
+import {operatorSession} from './operator-session.js?v=20261109-reload';
+// 同じタブの再読込ではsessionStorageから復元する。
+let tabStorage;try{tabStorage=sessionStorage;}catch{}
+const session=operatorSession({hash:location.hash,storage:tabStorage,scope:location.pathname});
+const key=session.key;
+if(session.persisted)history.replaceState(null,'',location.pathname+location.search);
 const auth={Authorization:`Bearer ${key}`};
 const controlDay=document.getElementById('control-day'),controlSlot=document.getElementById('control-slot'),controls=document.getElementById('controls'),message=document.getElementById('admin-message'),csv=document.getElementById('csv'),confirm=document.getElementById('confirm');
 let current=null,busy=false,connected=false,timer;
