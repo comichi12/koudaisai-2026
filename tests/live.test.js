@@ -15,6 +15,25 @@ const key='test-only-key-123456789012345678901234567890';
 function setup(){const sqlite=new DatabaseSync(':memory:');sqlite.exec(readFileSync(new URL('../migrations/0001_live.sql',import.meta.url),'utf8'));const DB={prepare(sql){let args=[];return{bind(...values){args=values;return this;},async first(){return sqlite.prepare(sql).get(...args)||null;},async all(){return{results:sqlite.prepare(sql).all(...args)};},run(){const result=sqlite.prepare(sql).run(...args);return{meta:{changes:Number(result.changes)}};}};},async batch(statements){sqlite.exec('BEGIN');try{const results=statements.map(stmt=>stmt.run());sqlite.exec('COMMIT');return results;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};return{DB,OPERATOR_KEYS:JSON.stringify({'担当A':key}),PUBLIC_ORIGIN:'https://comichi12.github.io'};}
 const request=(path,body,token=key)=>new Request(`https://api.test${path}`,{method:body?'POST':'GET',headers:{Authorization:`Bearer ${token}`,...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{})});
 const change=(slotId,version=0)=>({slotId,version,requestId:crypto.randomUUID(),note:''});
+
+test('reset removes all history and restores public waiting state without rewinding version',async()=>{
+ const env=setup(),old=change(slots[1].id);
+ await handleRequest(request('/api/control',old),env);
+ await handleRequest(request('/api/control',change(slots[2].id,1)),env);
+ const response=await handleRequest(request('/api/reset',{version:2,confirm:'RESET'}),env);
+ assert.equal(response.status,200);assert.deepEqual((await response.json()).state,{version:3,slotId:null,changedAt:null});
+ assert.deepEqual(await(await handleRequest(request('/api/state'),env)).json(),{version:3,slotId:null});
+ assert.equal((await(await handleRequest(request('/api/history'),env)).json()).rows.length,0);
+ assert.equal((await handleRequest(request('/api/control',old),env)).status,409);
+ assert.equal((await handleRequest(request('/api/control',change(slots[1].id,3)),env)).status,200);
+});
+test('reset requires authentication and confirmation, and stale reset never deletes newer history',async()=>{
+ const env=setup();await handleRequest(request('/api/control',change(slots[1].id)),env);
+ assert.equal((await handleRequest(request('/api/reset',{version:1,confirm:'RESET'},''),env)).status,401);
+ assert.equal((await handleRequest(request('/api/reset',{version:1}),env)).status,400);
+ assert.equal((await handleRequest(request('/api/reset',{version:0,confirm:'RESET'}),env)).status,409);
+ assert.equal((await(await handleRequest(request('/api/history'),env)).json()).rows.length,1);
+});
 test('public data has only section times and valid band references',()=>{assert.equal(days.length,2);assert.deepEqual(days[0].sections.map(s=>s.start),['12:00','13:06','14:42']);assert.deepEqual(days[1].sections.map(s=>s.start),['11:00','12:38','13:44']);for(const slot of slots){assert.equal(slot.start,undefined);assert.equal(slot.duration,undefined);if(slot.bandId)assert(bands.some(b=>b.id===slot.bandId));}assert.equal(new Set(slots.map(s=>s.id)).size,slots.length);});
 test('anonymous visitors can see only current state without actual start times',async()=>{const env=setup();await handleRequest(request('/api/control',change(slots[1].id)),env);const response=await handleRequest(request('/api/state'),env);assert.equal(response.status,200);assert.deepEqual(await response.json(),{version:1,slotId:slots[1].id});for(const path of ['/api/control','/api/history','/api/history.csv'])assert.equal((await handleRequest(request(path,null,''),env)).status,401);});
 test('switch records server time and operator atomically',async()=>{const env=setup(),slot=slots.find(s=>s.type==='band');const response=await handleRequest(request('/api/control',change(slot.id)),env);assert.equal(response.status,200);const {state}=await response.json();assert.equal(state.slotId,slot.id);assert.equal(state.version,1);assert(Number.isFinite(Date.parse(state.changedAt)));const history=await(await handleRequest(request('/api/history'),env)).json();assert.equal(history.rows.length,1);assert.equal(history.rows[0].operator,'担当A');});

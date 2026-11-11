@@ -21,14 +21,24 @@ async function operatorFor(request,env) {
 export async function handleRequest(request,env) {
   const {pathname}=new URL(request.url);
   if(pathname==='/api/state'&&request.method==='GET'){const current=await state(env.DB);return json({version:current.version,slotId:current.slotId});}
-  if(!['/api/control','/api/history','/api/history.csv'].includes(pathname))return json({error:'ページが見つかりません。'},404);
+  if(!['/api/control','/api/reset','/api/history','/api/history.csv'].includes(pathname))return json({error:'ページが見つかりません。'},404);
   const operator=await operatorFor(request,env);if(!operator)return json({error:'操作用URLを確認してください。'},401);
   if(request.method==='GET'&&pathname==='/api/history'){const rows=await env.DB.prepare('SELECT * FROM transitions ORDER BY id DESC LIMIT 100').all();return json({operator,rows:rows.results});}
   if(request.method==='GET'&&pathname==='/api/history.csv'){const rows=await env.DB.prepare('SELECT * FROM transitions ORDER BY id').all();return new Response(historyCsv(rows.results),{headers:{...headers,'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="koudaisai-2026-history.csv"'}});}
-  if(request.method!=='POST'||pathname!=='/api/control')return json({error:'許可されていない操作です。'},405);
+  if(request.method!=='POST'||!['/api/control','/api/reset'].includes(pathname))return json({error:'許可されていない操作です。'},405);
   if(!request.headers.get('Content-Type')?.startsWith('application/json'))return json({error:'JSONで送信してください。'},415);
   const text=await request.text();if(text.length>4096)return json({error:'入力が長すぎます。'},413);
   let body;try{body=JSON.parse(text);}catch{return json({error:'入力内容を確認してください。'},400);}
+  if(pathname==='/api/reset'){
+    if(!body||body.confirm!=='RESET'||!Number.isSafeInteger(body.version)||body.version<0)return json({error:'リセットの確認内容を確認してください。'},400);
+    const result=await env.DB.batch([
+      env.DB.prepare('DELETE FROM transitions WHERE EXISTS (SELECT 1 FROM live_state WHERE id=1 AND version=?)').bind(body.version),
+      env.DB.prepare('UPDATE live_state SET version=version+1,slot_id=NULL,changed_at=NULL WHERE id=1 AND version=?').bind(body.version)
+    ]);
+    const current=await state(env.DB);
+    if(!result[1].meta.changes)return json({error:'進行が更新されています。最新状態を確認してからリセットしてください。',state:current},409);
+    return json({state:current});
+  }
   if(!body||!slotById(body.slotId)||!Number.isSafeInteger(body.version)||body.version<0||typeof body.requestId!=='string'||!/^[a-zA-Z0-9-]{20,80}$/.test(body.requestId)||(body.note!==undefined&&(typeof body.note!=='string'||body.note.length>500)))return json({error:'入力内容を確認してください。'},400);
   const existing=await env.DB.prepare('SELECT slot_id, operator FROM transitions WHERE request_id=?').bind(body.requestId).first();
   if(existing){if(existing.slot_id!==body.slotId||existing.operator!==operator)return json({error:'操作IDが重複しています。'},409);return json({state:await state(env.DB),replayed:true});}

@@ -85,6 +85,8 @@ Workerも同じdata.jsを使うため、タイテの変更時はWorkerの再デ�
 
 ## 公開前確認
 
+管理画面の「進行と履歴をリセット」は、両日分の履歴を削除して公開表示を「開演をお楽しみに」へ戻します。必要なCSVは先に保存してください。確認欄へ「リセット」と入力した場合のみ実行でき、削除は取り消せません。
+
 紹介PNGを更新した場合はnode scripts/optimize-posters.jsで表示用WebP(540/1080px)を再生成してください。原本のPNGは保管し、ページではWebPを読み込みます。
 
 デザインはTailwind CSSで管理します。styles/input.cssを編集し、npm run build:cssでstyle.cssを生成して両方コミットしてください。GitHub Pagesでは生成済みCSSを配信するため、ブラウザーでTailwindの実行やCDN読込は不要です。

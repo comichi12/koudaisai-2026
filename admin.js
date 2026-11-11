@@ -36,6 +36,19 @@ async function refresh(){
 async function switchTo(slot,note=''){if(!slot||!connected||busy)return;if(current?.slotId===slot.id){message.textContent='現在と同じ進行です。';return;}busy=true;enable();document.getElementById('confirm-target').textContent=`${slot.date} ${slot.part?`第${slot.part}部 `:''}${slot.title}`;confirm.returnValue='';confirm.showModal();const accepted=await new Promise(resolve=>confirm.addEventListener('close',()=>resolve(confirm.returnValue==='switch'),{once:true}));if(!accepted){busy=false;enable();return;}try{const body={slotId:slot.id,version:current.version,requestId:crypto.randomUUID(),note};const result=await fetchJson('/api/control',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify(body)});updateState(result.state);if(note)document.getElementById('control-note').value='';}catch(error){if(error.state)updateState(error.state);message.textContent=error.message;busy=false;enable();return;}busy=false;await refresh();}
 document.getElementById('switch').addEventListener('click',()=>switchTo(slotById(controlSlot.value),document.getElementById('control-note').value));
 document.getElementById('next').addEventListener('click',()=>switchTo(nextSlot()));
+document.getElementById('reset').addEventListener('click',async()=>{
+ if(busy||!connected)return;
+ busy=true;enable();
+ const dialog=document.getElementById('reset-confirm');
+ document.getElementById('reset-word').value='';dialog.returnValue='';dialog.showModal();
+ const accepted=await new Promise(resolve=>dialog.addEventListener('close',()=>resolve(dialog.returnValue==='reset'),{once:true}));
+ if(!accepted){busy=false;enable();return;}
+ try{
+  const result=await fetchJson('/api/reset',{method:'POST',headers:{...auth,'Content-Type':'application/json'},body:JSON.stringify({version:current.version,confirm:'RESET'})});
+  updateState(result.state);document.getElementById('control-note').value='';
+ }catch(error){if(error.state)updateState(error.state);message.textContent=error.message;busy=false;enable();return;}
+ busy=false;await refresh();
+});
 csv.addEventListener('click',async()=>{csv.disabled=true;try{const response=await fetch(apiUrl('/api/history.csv'),{headers:auth,cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('CSVを取得できませんでした。');const url=URL.createObjectURL(await response.blob()),link=element('a');link.href=url;link.download='koudaisai-2026-history.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(error){message.textContent=error.message;}finally{enable();}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else refresh();});
 if(key.length>=32)refresh();else message.textContent='担当者用のURLから開いてください。';
